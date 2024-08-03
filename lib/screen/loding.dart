@@ -6,8 +6,12 @@ import 'package:weather_app_2/screen/weather_screen.dart';
 
 const apikey = 'b8511b4cbb1055510eb89f4a762dcc89';
 //서울
-double latitude3 = 37.5594793;
-double longitude3 = 126.9435838;
+// double latitude3 = 37.5594793;
+// double longitude3 = 126.9435838;
+
+//용산
+double latitude3 = 37.5326;
+double longitude3 = 126.9906;
 
 //부천
 // double latitude3 = 37.48764;
@@ -22,12 +26,10 @@ class Loading extends StatefulWidget {
 
 class _LoadingState extends State<Loading> {
   Timer? timer;
-  //Mqtt mqtt = Mqtt();
 
   @override
   void initState() {
     super.initState();
-    //mqtt.connect();
     askAPI();
     startTimer();
   }

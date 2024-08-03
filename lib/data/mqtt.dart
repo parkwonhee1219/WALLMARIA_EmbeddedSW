@@ -5,7 +5,7 @@ import 'package:mqtt_client/mqtt_server_client.dart';
 class Mqtt {
   final client = MqttServerClient('broker.hivemq.com', '');
 
-  Future<void> connect() async {
+  Future<void> connect(String message) async {
     client.port = 1883;
     client.logging(on: true);
     client.keepAlivePeriod = 20;
@@ -18,7 +18,7 @@ class Mqtt {
     client.pongCallback = _pong;
 
     final connMessage = MqttConnectMessage()
-        .withClientIdentifier('Wall_Maria') //클라이언트 식별자
+        .withClientIdentifier('App_WallMaria') //클라이언트 식별자
         .withWillTopic('willtopic') // 유언 주제
         .withWillMessage('My Will message') // 유언 메세지
         .startClean()
@@ -34,8 +34,7 @@ class Mqtt {
     }
 
     _subscribeToTopic('weather/WallMaria');
-    publishMessage('weather/WallMaria', 'Rain');
-    //_subscribeToTopic('weather/WallMaria');
+    publishMessage('weather/WallMaria', message);
 
   } // _connect() Method
 
