@@ -5,17 +5,10 @@ import 'package:weather_app_2/data/network.dart';
 import 'package:weather_app_2/screen/weather_screen.dart';
 
 const apikey = 'b8511b4cbb1055510eb89f4a762dcc89';
-//서울
-// double latitude3 = 37.5594793;
-// double longitude3 = 126.9435838;
+//위치 초기 설정 - 서울
+double latitude3 = 37.5594793;
+double longitude3 = 126.9435838;
 
-//용산
-double latitude3 = 37.5326;
-double longitude3 = 126.9906;
-
-//부천
-// double latitude3 = 37.48764;
-// double longitude3 = 126.75316;
 
 class Loading extends StatefulWidget {
   const Loading({super.key});
