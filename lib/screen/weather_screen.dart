@@ -10,7 +10,6 @@ const apikey = 'b8511b4cbb1055510eb89f4a762dcc89';
 class WeatherScreen extends StatefulWidget {
   WeatherScreen({this.parseWeatherData});
   final parseWeatherData;
-  //const WeatherScreen({super.key});
 
   @override
   State<WeatherScreen> createState() => _WeatherScreenState();
@@ -23,35 +22,36 @@ class _WeatherScreenState extends State<WeatherScreen> {
   late int temp;
   late String icon;
   late String formattedLocalTime;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     updateData(widget.parseWeatherData);
   }
 
   void updateData(dynamic weatherData) {
+    //날씨 json 데이터 추출하여 변수에 저장
     time = weatherData['timezone'];
     city = weatherData['name'];
-    weather = weatherData['weather'][0]['main'];
-    //weather = "rain";
+    //weather = weatherData['weather'][0]['main'];
+    weather = "rain";
     double temp2 = weatherData['main']['temp'];
     temp = temp2.toInt();
-    icon = weatherData['weather'][0]['icon'];
-    //icon = "09d";
+    //icon = weatherData['weather'][0]['icon'];
+    icon = "09d";
 
-    printLocalTime(time);
-    print(city);
-    print(weather);
-    print(temp);
+    printLocalTime(time);  //현재 날짜와 시간
+    print(city); //차수벽 설치 지역
+    print(weather); //날씨
+    print(temp); //온도
 
-    Mqtt mqtt = Mqtt();
-    if (weather == 'rain') {
-      mqtt.connect('rain');
+    Mqtt mqtt = Mqtt(); //MQTT 객체 생성
+    if (weather == 'rain') { //날씨가 비올 경우 'close' message 발행
+      mqtt.connect('close');
     }
   }
 
-  void printLocalTime(int timezoneOffset) {
+  void printLocalTime(int timezoneOffset) { //현재 날짜와 시간 출력 함수
     DateTime utcNow = DateTime.now().toUtc();
     DateTime localTime = utcNow.add(Duration(seconds: timezoneOffset));
     formattedLocalTime =
@@ -59,7 +59,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
     print('Local Time: $formattedLocalTime');
   }
 
-  void getLocation() async {
+  void getLocation() async { 
     MyLocation myLocation = MyLocation();
     await myLocation.getMyCurrentLocation();
     latitude3 = myLocation.latitude2;
@@ -87,7 +87,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
                         "현재 위치로 설정하시겠습니까?",
                         style: GoogleFonts.lato(
                             fontSize: 19.0,
-                            //fontWeight: FontWeight.bold,
                             color: Colors.black),
                       )),
                       actions: [

@@ -12,8 +12,7 @@ class MyLocation {
     if (status.isGranted) {
       // 위치 정보 가져오기
       try {
-        Position position = await Geolocator.getCurrentPosition(
-            desiredAccuracy: LocationAccuracy.high);
+        Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
         latitude2 = position.latitude;
         longitude2 = position.longitude;
         print(latitude2);
@@ -21,9 +20,10 @@ class MyLocation {
       } catch (e) {
         print('There was a problem retrieving the location: $e');
       }
-    } else {
+    } 
+
+    else { // 사용자가 권한을 거부한 경우 처리
       print('Location permission denied by user.');
-      // 사용자가 권한을 거부한 경우 처리
     }
   }
 }
